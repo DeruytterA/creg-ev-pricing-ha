@@ -1,0 +1,27 @@
+{
+  "title": "CREG EV Prijzen",
+  "config": {
+    "step": {
+      "user": {
+        "title": "CREG EV Prijzen instellen",
+        "description": "Wilt u de CREG EV Prijzen integratie instellen?"
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Reeds geconfigureerd. Slechts één configuratie mogelijk."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "price_flanders": {
+        "name": "Prijs Vlaanderen"
+      },
+      "price_brussels": {
+        "name": "Prijs Brussel"
+      },
+      "price_wallonia": {
+        "name": "Prijs Wallonië"
+      }
+    }
+  }
+}
