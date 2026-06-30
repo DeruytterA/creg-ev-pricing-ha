@@ -1,12 +1,12 @@
 {
   "domain": "creg_ev_prices",
   "name": "CREG EV Prices",
-  "codeowners": ["@your_github_username"],
+  "codeowners": ["@DeruytterA"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/your_github_username/creg_ev_prices",
+  "documentation": "https://github.com/DeruytterA/creg_ev_prices",
   "iot_class": "cloud_polling",
-  "issue_tracker": "https://github.com/your_github_username/creg_ev_prices/issues",
+  "issue_tracker": "https://github.com/DeruytterA/creg_ev_prices/issues",
   "requirements": ["beautifulsoup4"],
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

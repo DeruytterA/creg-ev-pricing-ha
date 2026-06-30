@@ -12,6 +12,7 @@ from homeassistant.helpers.update_coordinator import (
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.event import async_track_time_change
+import homeassistant.util.dt as dt_util
 
 from .const import DOMAIN
 
@@ -63,16 +64,27 @@ class CregEvPricesDataUpdateCoordinator(DataUpdateCoordinator):
                 if not table:
                     raise UpdateFailed("Could not find the price table on the CREG website.")
                 
-                # We need the first row from the tbody (latest quarter)
+                # Calculate current quarter string (e.g. "Q2/2026")
+                now = dt_util.now()
+                current_quarter = (now.month - 1) // 3 + 1
+                target_quarter_str = f"Q{current_quarter}/{now.year}"
+
                 tbody = table.find("tbody")
                 if not tbody:
                     raise UpdateFailed("Could not find tbody in the price table.")
                     
-                first_row = tbody.find("tr")
-                if not first_row:
-                    raise UpdateFailed("Could not find any rows in the price table.")
+                # Find the row matching the current quarter
+                target_row = None
+                for row in tbody.find_all("tr"):
+                    th = row.find("th")
+                    if th and th.text.strip().replace(" ", "") == target_quarter_str:
+                        target_row = row
+                        break
+                        
+                if not target_row:
+                    raise UpdateFailed(f"Could not find row for current quarter: {target_quarter_str}")
                     
-                cols = first_row.find_all("td")
+                cols = target_row.find_all("td")
                 if len(cols) < 3:
                     raise UpdateFailed("Unexpected table structure: less than 3 columns in a row.")
                     

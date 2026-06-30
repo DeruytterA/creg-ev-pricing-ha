@@ -3,5 +3,7 @@
   "render_readme": true,
   "hacs": "1.6.0",
   "zip_release": false,
-  "filename": "creg_ev_prices.zip"
+  "filename": "creg_ev_prices.zip",
+  "country": ["BE"],
+  "description": "Tracks the Belgian CREG EV reimbursement rates for Flanders, Brussels, and Wallonia."
 }
