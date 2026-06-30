@@ -46,8 +46,8 @@ class CregEvPriceSensor(CoordinatorEntity[CregEvPricesDataUpdateCoordinator], Se
         self.region = region
         self._attr_unique_id = f"creg_ev_price_{region.lower()}"
         
-        # Name will be translated or use fallback
-        self._attr_translation_key = f"price_{region.lower()}"
+        # Explicitly set the name to the region (Flanders, Brussels, Wallonia)
+        self._attr_name = region
 
     @property
     def native_value(self) -> float | None:

@@ -5,14 +5,15 @@ import aiohttp
 
 from bs4 import BeautifulSoup
 
-from homeassistant.core import HomeAssistant
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.update_coordinator import (
     DataUpdateCoordinator,
     UpdateFailed,
 )
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
+from homeassistant.helpers.event import async_track_time_change
 
-from .const import DOMAIN, UPDATE_INTERVAL_HOURS
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -26,8 +27,24 @@ class CregEvPricesDataUpdateCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name=DOMAIN,
-            update_interval=timedelta(hours=UPDATE_INTERVAL_HOURS),
+            update_interval=None,
         )
+        
+        # Schedule the update for the 1st of the month at 1:00 AM
+        async_track_time_change(
+            hass,
+            self._async_scheduled_update,
+            hour=1,
+            minute=0,
+            second=0
+        )
+
+    @callback
+    async def _async_scheduled_update(self, now):
+        """Update data if it's the first day of the month."""
+        if now.day == 1:
+            _LOGGER.debug("First of the month, requesting data update.")
+            await self.async_request_refresh()
 
     async def _async_update_data(self):
         """Fetch data from CREG."""
