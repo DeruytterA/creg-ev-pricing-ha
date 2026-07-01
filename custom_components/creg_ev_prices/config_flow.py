@@ -8,13 +8,28 @@ from homeassistant import config_entries
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 
-from .const import DOMAIN, DEFAULT_NAME
+from homeassistant.helpers.selector import (
+    SelectSelector,
+    SelectSelectorConfig,
+    SelectSelectorMode,
+)
+
+from .const import DOMAIN, DEFAULT_NAME, REGIONS, CONF_REGIONS
 
 _LOGGER = logging.getLogger(__name__)
 
-# This integration doesn't strictly need user input as it fetches public data for 3 regions.
-# But we need a config flow to allow setting it up via UI.
-STEP_USER_DATA_SCHEMA = vol.Schema({})
+STEP_USER_DATA_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_REGIONS, default=REGIONS): SelectSelector(
+            SelectSelectorConfig(
+                options=REGIONS,
+                multiple=True,
+                mode=SelectSelectorMode.DROPDOWN,
+                translation_key="regions",
+            )
+        )
+    }
+)
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle a config flow for CREG EV Prices."""

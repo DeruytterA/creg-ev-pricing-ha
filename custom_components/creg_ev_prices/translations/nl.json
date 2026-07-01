@@ -4,11 +4,23 @@
     "step": {
       "user": {
         "title": "CREG EV Prijzen instellen",
-        "description": "Wilt u de CREG EV Prijzen integratie instellen?"
+        "description": "Wilt u de CREG EV Prijzen integratie instellen? Selecteer de regio's die u wilt volgen.",
+        "data": {
+          "regions": "Regio's"
+        }
       }
     },
     "abort": {
       "single_instance_allowed": "Reeds geconfigureerd. Slechts één configuratie mogelijk."
+    }
+  },
+  "selector": {
+    "regions": {
+      "options": {
+        "Flanders": "Vlaanderen",
+        "Brussels": "Brussel",
+        "Wallonia": "Wallonië"
+      }
     }
   },
   "entity": {

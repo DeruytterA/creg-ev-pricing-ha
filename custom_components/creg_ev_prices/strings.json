@@ -4,11 +4,23 @@
     "step": {
       "user": {
         "title": "Set up CREG EV Prices",
-        "description": "Do you want to set up the CREG EV Prices integration?"
+        "description": "Do you want to set up the CREG EV Prices integration? Select the regions you want to track.",
+        "data": {
+          "regions": "Regions"
+        }
       }
     },
     "abort": {
       "single_instance_allowed": "Already configured. Only a single configuration possible."
+    }
+  },
+  "selector": {
+    "regions": {
+      "options": {
+        "Flanders": "Flanders",
+        "Brussels": "Brussels",
+        "Wallonia": "Wallonia"
+      }
     }
   },
   "entity": {

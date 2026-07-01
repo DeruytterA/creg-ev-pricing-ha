@@ -21,9 +21,11 @@ async def async_setup_entry(
     """Set up the sensor platform."""
     coordinator: CregEvPricesDataUpdateCoordinator = hass.data[DOMAIN][entry.entry_id]
 
+    selected_regions = entry.data.get("regions", REGIONS)
+
     sensors = [
         CregEvPriceSensor(coordinator, region)
-        for region in REGIONS
+        for region in selected_regions
     ]
     
     async_add_entities(sensors)
