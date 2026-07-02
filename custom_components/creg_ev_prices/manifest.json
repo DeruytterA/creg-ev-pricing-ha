@@ -8,5 +8,5 @@
   "iot_class": "cloud_polling",
   "issue_tracker": "https://github.com/DeruytterA/creg_ev_prices/issues",
   "requirements": ["beautifulsoup4"],
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
